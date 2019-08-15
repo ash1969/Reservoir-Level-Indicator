@@ -1,0 +1,546 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Reservoir Level Indicator</title>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<style>
+img {
+	display:block;
+}
+.imgwrap {
+	display:inline-block;
+	vertical-align:middle;
+	width:44%;
+	margin:0 2% 20px;
+}
+.imgwrap img {
+	width:100%;
+	height:auto
+}
+.rollover {
+	position:absolute;
+	left:0;
+	top:0;
+	right:0;
+	bottom:0;
+	background:rgba(0,0,0,0.6);
+	color:#fff;
+	transform:translateX(-100%);
+	transition:all .5s ease;
+	pointer-events:none;
+	z-index:auto;
+}
+.roll-inner {
+	display:table;
+	width:100%;
+	height:100%;
+}
+.roll-content {
+	text-align:center;
+	display:table-cell;
+	vertical-align:middle;
+}
+.roll-content h3, .roll-content p {
+	width:70%;
+	margin:auto;
+}
+.imgwrap:hover .rollover {
+	transform:translateX(0)
+}
+.point-of-reference {
+	position:relative;
+	width:1000px;
+	margin:auto;
+	text-align:center;
+	padding:10px;
+	border:0px solid #000;
+	overflow:hidden;
+}
+.title {
+  text-align: center;
+  margin: 10px;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+body{
+  background-color:#A9A9A9;
+}
+</style>
+
+
+</head>
+
+<body>
+<h1 class="title">MAP OF KARNATAKA</h1>
+<br>
+<img src="../../static/map.jpeg" width="400" height="600" class="center" alt="Planets" usemap="#karnatakamap">
+
+<map name="karnatakamap">
+  <area shape="circle" coords="190,345,35" alt="Reservoir" href="#r1" title="
+Reservoir: Linganamakki
+Inflow: 28,300 cusecs
+Outflow: 3,673 cusecs">
+  <area shape="circle" coords="130,300,35" alt="Reservoir" href="#r2" title="
+Reservoir: Supa
+Inflow: 14,414 cusecs
+Outflow: 4,393 cusecs">
+  <area shape="circle" coords="210,390,35" alt="Reservoir" href="#r3" title="
+Reservoir: Varahi
+Inflow: 5,507 cusecs
+Outflow: 0 cusecs">
+  <area shape="circle" coords="280,500,35" alt="Reservoir" href="#r4" title="
+Reservoir: Harangi
+Inflow: 7,077 cusecs
+Outflow: 3,200 cusecs">
+  <area shape="circle" coords="360,460,35" alt="Reservoir" href="#r5" title="
+Reservoir: Hemavathi
+Inflow: 12,144 cusecs
+Outflow: 7,720 cusecs">
+  <area shape="circle" coords="385,515,35" alt="Reservoir" href="#r6" title="
+Reservoir: K.R.S.
+Inflow: 38,844 cusecs
+Outflow: 32,278 cusecs">
+  <area shape="circle" coords="358,550,35" alt="Reservoir" href="#r7" title="
+Reservoir: Kabini
+Inflow: 30,027 cusecs
+Outflow: 33,708 cusecs">
+  <area shape="circle" coords="265,420,35" alt="Reservoir" href="#r8" title="
+Reservoir: Bhadra
+Inflow: 14,220 cusecs
+Outflow: 262 cusecs">
+  <area shape="circle" coords="450,285,35" alt="Reservoir" href="#r9" title="
+Reservoir: Tungabhadra
+Inflow: 1,54,109 cusecs
+Outflow: 1,16,092 cusecs">
+  <area shape="circle" coords="155,190,35" alt="Reservoir" href="#r10" title="
+Reservoir: Ghataprabha
+Inflow: 21,951 cusecs
+Outflow: 21,951 cusecs">
+  <area shape="circle" coords="207,210,35" alt="Reservoir" href="#r11" title="
+Reservoir: Malaprabha
+Inflow: 7,042 cusecs
+Outflow: 2,202 cusecs">
+  <area shape="circle" coords="362,150,35" alt="Reservoir" href="#r12" title="
+Reservoir: Almatti
+Inflow: 5,88,745 cusecs
+Outflow: 5,32,991 cusecs">
+  <area shape="circle" coords="525,145,35" alt="Reservoir" href="#r13" title="
+Reservoir: Narayanapura
+Inflow: 5,85,653 cusecs
+Outflow: 5,97,141 cusecs">
+</map>
+
+<br>
+<h1 class="title">RESERVOIR DATA</h1>
+<br>
+
+<div class="point-of-reference" id="r1">
+  <div class="imgwrap"> <img src="../../static/1.jpg" alt="Reservoir" width="300" height="300">
+    <div class="rollover">
+      <div class="roll-inner">
+        <div class="roll-content">
+          <p>Reservoir Name: Linganamakki</p>
+          <p>Location: Sagara Taluk, Karnataka</p>
+          <p>Coordinates: 14.175°N 74.846°E</p>
+          <br>
+          <table align="center">
+          <tr>
+            <td style="padding-right:50px;">
+               <p style="color:red;">Current Data</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Inflow: 28,300 cusecs</div>
+              <div>Outflow: 3,673 cusecs</div>
+            </td>
+            <td style="padding-left:5px;">
+              <p style="color:green;">Storage</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Live Storage: 131.75 TMC</div>
+              <div>Last year Live Storage: 139.59 TMC</div>
+            </td>
+          </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="point-of-reference" id="r2">
+  <div class="imgwrap"> <img src="../../static/2.jpg" alt="Reservoir" width="300" height="300">
+    <div class="rollover">
+      <div class="roll-inner">
+        <div class="roll-content">
+          <p>Reservoir Name: Supa</p>
+          <p>Location: Joida, Karnataka</p>
+          <p>Coordinates: 15°16'34''N 74°31'36''E</p>
+          <br>
+          <table align="center">
+          <tr>
+            <td style="padding-right:50px;">
+               <p style="color:red;">Current Data</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Inflow: 14,414 cusecs</div>
+              <div>Outflow: 4,393 cusecs</div>
+            </td>
+            <td style="padding-left:5px;">
+              <p style="color:green;">Storage</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Live Storage: 134.64 TMC</div>
+              <div>Last year Live Storage: 114.54 TMC</div>
+            </td>
+          </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="point-of-reference" id="r3">
+  <div class="imgwrap"> <img src="../../static/3.jpg" alt="Reservoir" width="300" height="300">
+    <div class="rollover">
+      <div class="roll-inner">
+        <div class="roll-content">
+          <p>Reservoir Name: Varahi</p>
+          <p>Location: Hummadagallu, Karnataka</p>
+          <p>Coordinates: 13°40'34''N 75°2'44''E</p>
+          <br>
+          <table align="center">
+          <tr>
+            <td style="padding-right:50px;">
+               <p style="color:red;">Current Data</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Inflow: 5,507 cusecs</div>
+              <div>Outflow: 0 cusecs</div>
+            </td>
+            <td style="padding-left:5px;">
+              <p style="color:green;">Storage</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Live Storage: 16.89 TMC</div>
+              <div>Last year Live Storage: 26.65 TMC</div>
+            </td>
+          </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="point-of-reference" id="r4">
+  <div class="imgwrap"> <img src="../../static/4.jpg" alt="Reservoir" width="300" height="300">
+    <div class="rollover">
+      <div class="roll-inner">
+        <div class="roll-content">
+          <p>Reservoir Name: Harangi</p>
+          <p>Location: Hudgur, Somwarpet, Kodagu, Karnataka</p>
+          <p>Coordinates: 12°29'30''N 75°54'20''E</p>
+          <br>
+          <table align="center">
+          <tr>
+            <td style="padding-right:50px;">
+               <p style="color:red;">Current Data</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Inflow: 7,077 cusecs</div>
+              <div>Outflow: 3,200 cusecs</div>
+            </td>
+            <td style="padding-left:5px;">
+              <p style="color:green;">Storage</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Live Storage: 7.31 TMC</div>
+              <div>Last year Live Storage: 7.36 TMC</div>
+            </td>
+          </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="point-of-reference" id="r5">
+  <div class="imgwrap"> <img src="../../static/5.jpg" alt="Reservoir" width="300" height="300">
+    <div class="rollover">
+      <div class="roll-inner">
+        <div class="roll-content">
+          <p>Reservoir Name: Hemavathi</p>
+          <p>Location: Gorur, Karnataka</p>
+          <p>Coordinates: 12°45'0''N 76°3'0''E</p>
+          <br>
+          <table align="center">
+          <tr>
+            <td style="padding-right:50px;">
+               <p style="color:red;">Current Data</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Inflow: 12,144 cusecs</div>
+              <div>Outflow: 7,720 cusecs</div>
+            </td>
+            <td style="padding-left:5px;">
+              <p style="color:green;">Storage</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Live Storage: 35.17 TMC</div>
+              <div>Last year Live Storage: 34.60 TMC</div>
+            </td>
+          </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="point-of-reference" id="r6">
+  <div class="imgwrap"> <img src="../../static/6.jpg" alt="Reservoir" width="300" height="300">
+    <div class="rollover">
+      <div class="roll-inner">
+        <div class="roll-content">
+          <p>Reservoir Name: K.R.S.</p>
+          <p>Location: Mandya, Karnataka</p>
+          <p>Coordinates: 12°24'58''N 76°34'26''E</p>
+          <br>
+          <table align="center">
+          <tr>
+            <td style="padding-right:50px;">
+               <p style="color:red;">Current Data</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Inflow: 38,844 cusecs</div>
+              <div>Outflow: 32,278 cusecs</div>
+            </td>
+            <td style="padding-left:5px;">
+              <p style="color:green;">Storage</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Live Storage: 44.07 TMC</div>
+              <div>Last year Live Storage: 41.17 TMC</div>
+            </td>
+          </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="point-of-reference" id="r7">
+  <div class="imgwrap"> <img src="../../static/7.jpg" alt="Reservoir" width="300" height="300">
+    <div class="rollover">
+      <div class="roll-inner">
+        <div class="roll-content">
+          <p>Reservoir Name: Kabini</p>
+          <p>Location: Heggadadevanakote Taluk, Karnataka</p>
+          <p>Coordinates: 11°57'22''N 76°16'29''E</p>
+          <br>
+          <table align="center">
+          <tr>
+            <td style="padding-right:50px;">
+               <p style="color:red;">Current Data</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Inflow: 30,027 cusecs</div>
+              <div>Outflow: 33,708 cusecs</div>
+            </td>
+            <td style="padding-left:5px;">
+              <p style="color:green;">Storage</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Live Storage: 14.75 TMC</div>
+              <div>Last year Live Storage: 11.48 TMC</div>
+            </td>
+          </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="point-of-reference" id="r8">
+  <div class="imgwrap"> <img src="../../static/8.jpg" alt="Reservoir" width="300" height="300">
+    <div class="rollover">
+      <div class="roll-inner">
+        <div class="roll-content">
+          <p>Reservoir Name: Bhadra</p>
+          <p>Location: Lakkavalli Tarikere Chikmagalur, Karnataka</p>
+          <p>Coordinates: 13°42'0''N 75°38'24''E</p>
+          <br>
+          <table align="center">
+          <tr>
+            <td style="padding-right:50px;">
+               <p style="color:red;">Current Data</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Inflow: 14,220 cusecs</div>
+              <div>Outflow: 262 cusecs</div>
+            </td>
+            <td style="padding-left:5px;">
+              <p style="color:green;">Storage</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Live Storage: 57.88 TMC</div>
+              <div>Last year Live Storage: 61.36 TMC</div>
+            </td>
+          </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="point-of-reference" id="r9">
+  <div class="imgwrap"> <img src="../../static/9.jpg" alt="Reservoir" width="300" height="300">
+    <div class="rollover">
+      <div class="roll-inner">
+        <div class="roll-content">
+          <p>Reservoir Name: Tungabhadra</p>
+          <p>Location: Hosapete, Ballari District, Karnataka</p>
+          <p>Coordinates: 15°18'N 76°20'E</p>
+          <br>
+          <table align="center">
+          <tr>
+            <td style="padding-right:50px;">
+               <p style="color:red;">Current Data</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Inflow: 1,16,092 cusecs</div>
+              <div>Outflow: 1,49,198 cusecs</div>
+            </td>
+            <td style="padding-left:5px;">
+              <p style="color:green;">Storage</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Live Storage: 93.39 TMC</div>
+              <div>Last year Live Storage: 97.59 TMC</div>
+            </td>
+          </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="point-of-reference" id="r10">
+  <div class="imgwrap"> <img src="../../static/10.jpg" alt="Reservoir" width="300" height="300">
+    <div class="rollover">
+      <div class="roll-inner">
+        <div class="roll-content">
+          <p>Reservoir Name: Ghataprabha</p>
+          <p>Location: Hidkal, Belagavi District, Karnataka</p>
+          <p>Coordinates: 16°8'35''N 74°38'34''E</p>
+          <br>
+          <table align="center">
+          <tr>
+            <td style="padding-right:50px;">
+               <p style="color:red;">Current Data</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Inflow: 21,951 cusecs</div>
+              <div>Outflow: 21,951 cusecs</div>
+            </td>
+            <td style="padding-left:5px;">
+              <p style="color:green;">Storage</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Live Storage: 48.53 TMC</div>
+              <div>Last year Live Storage: 48.98 TMC</div>
+            </td>
+          </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="point-of-reference" id="r11">
+  <div class="imgwrap"> <img src="../../static/11.jpg" alt="Reservoir" width="300" height="300">
+    <div class="rollover">
+      <div class="roll-inner">
+        <div class="roll-content">
+          <p>Reservoir Name: Malaprabha</p>
+          <p>Location: Saundhatti, Belgaum, Karnataka</p>
+          <p>Coordinates: 15°82'N 75°09'E</p>
+          <br>
+          <table align="center">
+          <tr>
+            <td style="padding-right:50px;">
+               <p style="color:red;">Current Data</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Inflow: 7,042 cusecs</div>
+              <div>Outflow: 2,202 cusecs</div>
+            </td>
+            <td style="padding-left:5px;">
+              <p style="color:green;">Storage</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Live Storage: 31.87 TMC</div>
+              <div>Last year Live Storage: 17.47 TMC</div>
+            </td>
+          </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="point-of-reference" id="r12">
+  <div class="imgwrap"> <img src="../../static/12.jpg" alt="Reservoir" width="300" height="300">
+    <div class="rollover">
+      <div class="roll-inner">
+        <div class="roll-content">
+          <p>Reservoir Name: Almatti</p>
+          <p>Location: Almatti, Nidgundi, Bijapur District, Karnataka</p>
+          <p>Coordinates: 16°33'N 75°88'E</p>
+          <br>
+          <table align="center">
+          <tr>
+            <td style="padding-right:50px;">
+               <p style="color:red;">Current Data</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Inflow: 5,88,745 cusecs</div>
+              <div>Outflow: 5,32,991 cusecs</div>
+            </td>
+            <td style="padding-left:5px;">
+              <p style="color:green;">Storage</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Live Storage: 102.05 TMC</div>
+              <div>Last year Live Storage: 119.26 TMC</div>
+            </td>
+          </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="point-of-reference" id="r13">
+  <div class="imgwrap"> <img src="../../static/13.jpg" alt="Reservoir" width="300" height="300">
+    <div class="rollover">
+      <div class="roll-inner">
+        <div class="roll-content">
+          <p>Reservoir Name: Narayanapura</p>
+          <p>Location: Shorapur, Yadagiri District, Karnataka</p>
+          <p>Coordinates: 16°10'42''N 76°13'28''E</p>
+          <br>
+          <table align="center">
+          <tr>
+            <td style="padding-right:50px;">
+               <p style="color:red;">Current Data</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Inflow: 5,88,745 cusecs</div>
+              <div>Outflow: 5,97,141 cusecs</div>
+            </td>
+            <td style="padding-left:5px;">
+              <p style="color:green;">Storage</p>
+              <div>Recorded On: 14-08-2019</div>
+              <div>Live Storage: 15.21 TMC</div>
+              <div>Last year Live Storage: 25.44 TMC</div>
+            </td>
+          </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+</body>
+</html>
